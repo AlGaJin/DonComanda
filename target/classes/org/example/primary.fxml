@@ -44,11 +44,11 @@
                   </VBox>
                   <VBox spacing="5.0">
                      <children>
-                        <TextField>
+                        <TextField fx:id="numMesaTxtField">
                            <font>
                               <Font size="14.0" />
                            </font></TextField>
-                        <TextField editable="false">
+                        <TextField fx:id="numComensalesTxtField" editable="false">
                            <font>
                               <Font size="14.0" />
                            </font></TextField>
@@ -56,10 +56,13 @@
                   </VBox>
                </children>
             </HBox>
-            <TableView fx:id="tablaPedido" VBox.vgrow="ALWAYS">
+            <TableView fx:id="tablaPedido" editable="true" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
             </TableView>
             <HBox VBox.vgrow="ALWAYS">
                <children>
@@ -176,7 +179,7 @@
                 <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
               </rowConstraints>
                <children>
-                  <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="2.0">
                      <children>
                         <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" VBox.vgrow="ALWAYS" />
                         <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Desayunos" textAlignment="CENTER">
@@ -185,8 +188,11 @@
                            </font>
                         </Label>
                      </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
                   </VBox>
-                  <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1">
+                  <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="2.0" GridPane.columnIndex="1">
                      <children>
                         <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" VBox.vgrow="ALWAYS" />
                         <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Raciones" textAlignment="CENTER">
@@ -195,8 +201,11 @@
                            </font>
                         </Label>
                      </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
                   </VBox>
-                  <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2">
+                  <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="2.0" GridPane.columnIndex="2">
                      <children>
                         <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" VBox.vgrow="ALWAYS" />
                         <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Bocadillos" textAlignment="CENTER">
@@ -205,8 +214,11 @@
                            </font>
                         </Label>
                      </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
                   </VBox>
-                  <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1">
+                  <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="2.0" GridPane.rowIndex="1">
                      <children>
                         <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" VBox.vgrow="ALWAYS" />
                         <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Refrescos" textAlignment="CENTER">
@@ -215,8 +227,11 @@
                            </font>
                         </Label>
                      </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
                   </VBox>
-                  <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="2.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" VBox.vgrow="ALWAYS" />
                         <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Cervezas" textAlignment="CENTER">
@@ -225,8 +240,11 @@
                            </font>
                         </Label>
                      </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
                   </VBox>
-                  <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="2.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
                         <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" VBox.vgrow="ALWAYS" />
                         <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Alcoholes" textAlignment="CENTER">
@@ -235,6 +253,9 @@
                            </font>
                         </Label>
                      </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
                   </VBox>
                </children>
                <padding>
@@ -252,9 +273,9 @@
                   <RowConstraints vgrow="ALWAYS" />
                </rowConstraints>
                <children>
-                  <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="visibility: false;">
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="2.0" style="visibility: false;">
                      <children>
-                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" VBox.vgrow="ALWAYS" />
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#selecProducto" VBox.vgrow="ALWAYS" />
                         <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Desayunos" textAlignment="CENTER">
                            <font>
                               <Font name="System Bold" size="14.0" />
@@ -265,9 +286,9 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </VBox>
-                  <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="visibility: false;" GridPane.columnIndex="1">
+                  <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="2.0" style="visibility: false;" GridPane.columnIndex="1">
                      <children>
-                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" VBox.vgrow="ALWAYS" />
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#selecProducto" VBox.vgrow="ALWAYS" />
                         <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Raciones" textAlignment="CENTER">
                            <font>
                               <Font name="System Bold" size="14.0" />
@@ -278,9 +299,9 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </VBox>
-                  <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="visibility: false;" GridPane.columnIndex="2">
+                  <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="2.0" style="visibility: false;" GridPane.columnIndex="2">
                      <children>
-                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" VBox.vgrow="ALWAYS" />
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#selecProducto" VBox.vgrow="ALWAYS" />
                         <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Bocadillos" textAlignment="CENTER">
                            <font>
                               <Font name="System Bold" size="14.0" />
@@ -291,9 +312,9 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </VBox>
-                  <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="visibility: false;" GridPane.rowIndex="1">
+                  <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="2.0" style="visibility: false;" GridPane.rowIndex="1">
                      <children>
-                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" VBox.vgrow="ALWAYS" />
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#selecProducto" VBox.vgrow="ALWAYS" />
                         <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Refrescos" textAlignment="CENTER">
                            <font>
                               <Font name="System Bold" size="14.0" />
@@ -304,9 +325,9 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </VBox>
-                  <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="visibility: false;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="2.0" style="visibility: false;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" VBox.vgrow="ALWAYS" />
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#selecProducto" VBox.vgrow="ALWAYS" />
                         <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Cervezas" textAlignment="CENTER">
                            <font>
                               <Font name="System Bold" size="14.0" />
@@ -317,9 +338,9 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </VBox>
-                  <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="visibility: false;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="2.0" style="visibility: false;" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
-                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" VBox.vgrow="ALWAYS" />
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#selecProducto" VBox.vgrow="ALWAYS" />
                         <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Alcoholes" textAlignment="CENTER">
                            <font>
                               <Font name="System Bold" size="14.0" />

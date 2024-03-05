@@ -18,8 +18,38 @@ public class Producto {
         total = precio;
     }
 
+    public Producto(int id, int uds, String nombre, Double precio, int dto) {
+        this.id = id;
+        this.uds = uds;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.dto = dto;
+        calcularTotal();
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getUds() {
+        return uds;
+    }
+
+    public Double getPrecio() {
+        return precio;
+    }
+
+    public int getDto() {
+        return dto;
+    }
+
+    public Double getTotal() {
+        return total;
+    }
+
     public void aumentarUds(){
         uds++;
+        calcularTotal();
     }
 
     public void setUds(int uds){

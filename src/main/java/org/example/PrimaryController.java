@@ -1,5 +1,6 @@
 package org.example;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -14,10 +15,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
+import org.example.db.DBHelper;
+import org.example.modelo.Mesa;
 import org.example.modelo.Producto;
 
 import java.io.File;
-import java.util.LinkedList;
+import java.util.List;
 
 public class PrimaryController {
 
@@ -27,8 +30,13 @@ public class PrimaryController {
     private GridPane categoriasGridPane;
     @FXML
     private GridPane productosGridPane;
+    private final DBHelper dbHelper = new DBHelper();
+    private ObservableList<Producto> productos;
+    private List<Mesa> mesas;
 
     public void initialize(){
+        mesas = dbHelper.getMesas();
+        productos = FXCollections.observableArrayList();
         cargarCategorias();
         generarTabla();
     }
@@ -40,7 +48,7 @@ public class PrimaryController {
         btn.setBackground(new Background(myBF));
     }
 
-    public void cargarCategorias(){
+    private void cargarCategorias(){
         ObservableList<Node> children = categoriasGridPane.getChildren();
         for (Node vbox :children) {
             ObservableList<Node> vboxChildren = ((VBox)vbox).getChildren();
@@ -58,7 +66,7 @@ public class PrimaryController {
     }
 
     @FXML
-    public void selecCategoria(String catName){
+    private void selecCategoria(String catName){
         File dir = new File("src/main/resources/Images/"+catName);
         File imagenes[] = dir.listFiles();
 
@@ -82,7 +90,7 @@ public class PrimaryController {
         }
     }
 
-    public void generarTabla(){
+    private void generarTabla(){
         TableColumn<Producto, String> colProducto = new TableColumn<>("Producto");
         TableColumn<Producto, Integer> colUnidades = new TableColumn<>("Uds.");
         TableColumn<Producto, Double> colPrecio = new TableColumn<>("Importe");
@@ -106,6 +114,22 @@ public class PrimaryController {
 
     @FXML
     public void selecProducto(Event e){
+        String nombreSelec = ((Label)((Button)e.getSource()).getParent().getChildrenUnmodifiable().get(1)).getText().toLowerCase();
+        boolean enc = false;
+        if(!productos.isEmpty()){
+            for (Producto p: productos) {
+                if(p.getNombre().equals(nombreSelec)){
+                    p.aumentarUds();
+                    enc = true;
+                    break;
+                }
+            }
+        }
 
+        if(!enc){
+            productos.add(dbHelper.getProducto(nombreSelec));
+        }
+
+        tablaPedido.getItems().setAll(productos);
     }
 }
