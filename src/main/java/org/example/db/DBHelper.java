@@ -66,8 +66,7 @@ public class DBHelper {
             while (rs.next()){
                 int numMesa = rs.getInt("num");
                 boolean ocupada = rs.getBoolean("ocupada");
-                int numComensales = rs.getInt("numComensales");
-                Mesa mesa = new Mesa(numMesa, ocupada, numComensales);
+                Mesa mesa = new Mesa(numMesa, ocupada);
                 setProductos(mesa);
                 mesas.add(mesa);
             }

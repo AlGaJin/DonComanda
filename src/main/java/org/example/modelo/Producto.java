@@ -13,9 +13,8 @@ public class Producto {
         this.nombre = nombre;
         this.precio = precio;
         this.dto = dto;
-
         uds = 1;
-        total = precio;
+        calcularTotal();
     }
 
     public Producto(int id, int uds, String nombre, Double precio, int dto) {
@@ -65,6 +64,6 @@ public class Producto {
     }
 
     private void calcularTotal(){
-        total = (precio-(precio*(dto/100)))*uds;
+        total = (double) Math.round(((precio-(precio*((double)dto/100)))*uds)*100)/100;
     }
 }

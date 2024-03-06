@@ -4,8 +4,7 @@ USE DonComanda;
 
 CREATE TABLE mesas(
 	num INT PRIMARY KEY,
-    ocupada BOOLEAN DEFAULT FALSE,
-    numComensales INT DEFAULT 0
+    ocupada BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE productos(

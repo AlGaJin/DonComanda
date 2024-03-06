@@ -6,10 +6,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import javafx.scene.image.Image;
@@ -30,6 +27,8 @@ public class PrimaryController {
     private GridPane categoriasGridPane;
     @FXML
     private GridPane productosGridPane;
+    @FXML
+    private TextField numMesaTxtField, calcTxtField;
     private final DBHelper dbHelper = new DBHelper();
     private ObservableList<Producto> productos;
     private List<Mesa> mesas;
@@ -109,7 +108,12 @@ public class PrimaryController {
 
     @FXML
     public void calculadora(Event e){
-
+        String number = ((Button)e.getSource()).getText();
+        if(number.equals("C")){
+            calcTxtField.setText("");
+        }else{
+            calcTxtField.appendText(number);
+        }
     }
 
     @FXML
