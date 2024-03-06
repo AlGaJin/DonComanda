@@ -4,20 +4,24 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
+import javafx.stage.Stage;
 import org.example.db.DBHelper;
 import org.example.modelo.Mesa;
 import org.example.modelo.Producto;
 
 import java.io.File;
-import java.util.List;
+import java.util.LinkedList;
 
 public class PrimaryController {
 
@@ -31,10 +35,9 @@ public class PrimaryController {
     private TextField numMesaTxtField, calcTxtField;
     private final DBHelper dbHelper = new DBHelper();
     private ObservableList<Producto> productos;
-    private List<Mesa> mesas;
+    private Mesa mesa;
 
     public void initialize(){
-        mesas = dbHelper.getMesas();
         productos = FXCollections.observableArrayList();
         cargarCategorias();
         generarTabla();
@@ -135,5 +138,30 @@ public class PrimaryController {
         }
 
         tablaPedido.getItems().setAll(productos);
+    }
+
+    @FXML
+    public void selecMesa(){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("secondary.fxml"));
+            Parent root = loader.load();
+            SecondaryController secondaryController = loader.getController();
+            secondaryController.setParentController(this);
+            Stage stage = new Stage();
+            stage.setTitle("Selecciona una mesa");
+            stage.setMaximized(true);
+            stage.setScene(new Scene(root));
+            stage.show();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void setMesa(Mesa mesa){
+
+    }
+
+    public ObservableList<Producto> getProductos(){
+        return productos;
     }
 }

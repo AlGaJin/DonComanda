@@ -9,7 +9,7 @@
    <children>
       <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
          <children>
-            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="SELECCIONAR MESA" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#selecMesa" text="SELECCIONAR MESA" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
                <font>
                   <Font size="18.0" />
                </font>
@@ -48,7 +48,7 @@
                   </VBox>
                   <VBox spacing="5.0">
                      <children>
-                        <TextField fx:id="numMesaTxtField">
+                        <TextField fx:id="numMesaTxtField" editable="false">
                            <font>
                               <Font size="14.0" />
                            </font></TextField>

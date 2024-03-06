@@ -33,9 +33,10 @@ public class DBHelper {
             ResultSet rs = ps.executeQuery();
 
             if(rs.next()){
-                int id = rs.getInt("id");
+                int id_factura = rs.getInt("id");
+                mesa.setIdFactura(id_factura);
                 ps = c.prepareStatement("SELECT * FROM detalle_factura WHERE id_factura=?");
-                ps.setInt(1, id);
+                ps.setInt(1, id_factura);
                 rs = ps.executeQuery();
 
                 while (rs.next()){
