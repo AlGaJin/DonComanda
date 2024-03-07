@@ -51,18 +51,19 @@ public class Producto {
         calcularTotal();
     }
 
+    public int getId() {
+        return id;
+    }
     public void setUds(int uds){
         this.uds = uds;
+        calcularTotal();
     }
-
     public void setPrecio(Double precio){
         this.precio = precio;
     }
-
     public void setDto(int dto){
         this.dto = dto;
     }
-
     private void calcularTotal(){
         total = (double) Math.round(((precio-(precio*((double)dto/100)))*uds)*100)/100;
     }

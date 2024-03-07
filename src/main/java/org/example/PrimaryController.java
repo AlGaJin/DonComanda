@@ -21,7 +21,6 @@ import org.example.modelo.Mesa;
 import org.example.modelo.Producto;
 
 import java.io.File;
-import java.util.LinkedList;
 
 public class PrimaryController {
 
@@ -33,11 +32,15 @@ public class PrimaryController {
     private GridPane productosGridPane;
     @FXML
     private TextField numMesaTxtField, calcTxtField;
+    @FXML
+    private Label articulosLabel, udsLabel, totalLabel;
+    private boolean mesaSelected;
     private final DBHelper dbHelper = new DBHelper();
     private ObservableList<Producto> productos;
     private Mesa mesa;
 
     public void initialize(){
+        mesaSelected = false;
         productos = FXCollections.observableArrayList();
         cargarCategorias();
         generarTabla();
@@ -57,7 +60,7 @@ public class PrimaryController {
             String catName = ((Label)vboxChildren.get(1)).getText().toLowerCase();
             Button catBtn = ((Button) vboxChildren.get(0));
 
-            String imgPath = "file:src/main/resources/Images/"+catName + ".png";
+            String imgPath = "file:src/main/resources/Imagenes/Productos/"+catName + ".png";
 
             setBkgImg(imgPath, catBtn);
 
@@ -69,7 +72,7 @@ public class PrimaryController {
 
     @FXML
     private void selecCategoria(String catName){
-        File dir = new File("src/main/resources/Images/"+catName);
+        File dir = new File("src/main/resources/Imagenes/Productos/"+catName);
         File imagenes[] = dir.listFiles();
 
         ObservableList<Node> childen = productosGridPane.getChildren();
@@ -97,7 +100,7 @@ public class PrimaryController {
         TableColumn<Producto, Integer> colUnidades = new TableColumn<>("Uds.");
         TableColumn<Producto, Double> colPrecio = new TableColumn<>("Importe");
         TableColumn<Producto, Integer> colDto = new TableColumn<>("Dto %");
-        TableColumn<Producto, Double> colTotal = new TableColumn<>("Total");
+        TableColumn<Producto, Double> colTotal = new TableColumn<>("Total €");
 
         colProducto.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colUnidades.setCellValueFactory(new PropertyValueFactory<>("uds"));
@@ -109,6 +112,25 @@ public class PrimaryController {
         tablaPedido.getColumns().addAll(new TableColumn[]{colProducto, colUnidades, colPrecio, colDto, colTotal});
     }
 
+    public void updateTable(){
+        if(mesa != null){
+            mesa.setProductos(productos);
+        }
+        tablaPedido.getItems().setAll(productos);
+
+        int articulos = productos.size();
+        int uds = 0;
+        double total = 0;
+        for (Producto p: productos) {
+            uds += p.getUds();
+            total += p.getTotal();
+        }
+
+        articulosLabel.setText(String.valueOf(articulos));
+        udsLabel.setText(String.valueOf(uds));
+        totalLabel.setText(String.valueOf(total));
+    }
+
     @FXML
     public void calculadora(Event e){
         String number = ((Button)e.getSource()).getText();
@@ -116,6 +138,46 @@ public class PrimaryController {
             calcTxtField.setText("");
         }else{
             calcTxtField.appendText(number);
+        }
+    }
+
+    @FXML
+    public void introBtn(){
+        String uds = calcTxtField.getText();
+        int idx = tablaPedido.getSelectionModel().getSelectedIndex();
+        if(!uds.isEmpty() && idx != -1){
+            if(Integer.parseInt(uds) == 0){
+                eliminarBtn();
+            }else {
+                productos.get(idx).setUds(Integer.parseInt(uds));
+            }
+            calcTxtField.setText("");
+            updateTable();
+        }
+    }
+
+    @FXML
+    public void eliminarBtn(){
+        int idx = tablaPedido.getSelectionModel().getSelectedIndex();
+        if(idx != -1){
+            Producto p = productos.remove(idx);
+            if(mesa != null) {
+                dbHelper.deleteFromDetalleFactura(p.getId(), mesa.getIdFactura());
+            }
+            updateTable();
+        }
+    }
+
+    @FXML
+    public void importeBtn(){
+        if(!productos.isEmpty()){
+            if(mesa != null){
+                dbHelper.generarImporte(mesa);
+            }else{
+                dbHelper.generarImporte(productos);
+                productos = FXCollections.observableArrayList();
+                updateTable();
+            }
         }
     }
 
@@ -136,8 +198,7 @@ public class PrimaryController {
         if(!enc){
             productos.add(dbHelper.getProducto(nombreSelec));
         }
-
-        tablaPedido.getItems().setAll(productos);
+        updateTable();
     }
 
     @FXML
@@ -151,17 +212,29 @@ public class PrimaryController {
             stage.setTitle("Selecciona una mesa");
             stage.setMaximized(true);
             stage.setScene(new Scene(root));
-            stage.show();
+            stage.showAndWait();
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    public void setMesa(Mesa mesa){
+    public boolean isMesaSelected(){
+        return mesaSelected;
+    }
 
+    public void setMesa(Mesa mesa){
+        this.mesa = mesa;
+        productos = mesa.getProductos();
+        numMesaTxtField.setText(String.valueOf(mesa.getNum()));
+        updateTable();
+        mesaSelected = true;
     }
 
     public ObservableList<Producto> getProductos(){
         return productos;
+    }
+
+    public void setProductos(ObservableList<Producto> productos){
+        this.productos = productos;
     }
 }

@@ -64,13 +64,13 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                <children>
                   <Label text="Artículos: ">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font></Label>
-                  <Label fx:id="articulosLabel" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                  <Label fx:id="articulosLabel" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" text="0" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets right="5.0" />
                      </HBox.margin>
@@ -82,18 +82,23 @@
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font></Label>
-                  <Label fx:id="udsLabel" layoutX="38.0" layoutY="10.0" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                  <Label fx:id="udsLabel" layoutX="38.0" layoutY="10.0" maxWidth="1.7976931348623157E308" text="0" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font></Label>
-                  <Label layoutX="66.0" layoutY="10.0" text="Total: ">
+                  <Label alignment="CENTER_RIGHT" layoutX="66.0" layoutY="10.0" maxWidth="1.7976931348623157E308" text="Total: " textAlignment="RIGHT">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font></Label>
-                  <Label fx:id="totalLabel" layoutX="94.0" layoutY="10.0" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                  <Label fx:id="totalLabel" alignment="CENTER_RIGHT" layoutX="94.0" layoutY="10.0" text="0" textAlignment="RIGHT" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font></Label>
+                  <Label fx:id="totalLabel1" alignment="CENTER_RIGHT" layoutX="163.0" layoutY="10.0" text="€" textAlignment="RIGHT">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
                </children>
             </HBox>
             <TextField fx:id="calcTxtField" alignment="CENTER" editable="false" promptText="Cambiar unidades">
@@ -161,7 +166,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Button>
-                        <Button layoutX="36.0" layoutY="60.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#calculadora" text="0" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
+                        <Button layoutX="36.0" layoutY="60.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#calculadora" text="0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -171,16 +176,21 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Button>
+                        <Button layoutX="45.0" layoutY="113.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#eliminarBtn" style="-fx-background-color: red;" text="Eliminar" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
                      </children>
                   </GridPane>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="COBRAR" VBox.vgrow="ALWAYS">
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#importeBtn" text="IMPRIMIR IMPORTE" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="INTRO" VBox.vgrow="ALWAYS">
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#introBtn" text="INTRO" VBox.vgrow="ALWAYS">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

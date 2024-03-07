@@ -16,8 +16,8 @@ CREATE TABLE productos(
 
 CREATE TABLE facturas(
 	id INT PRIMARY KEY AUTO_INCREMENT,
-    mesa INT,
-    fecha DATE NOT NULL,
+    mesa INT NULL,
+    fecha TIMESTAMP NOT NULL,
     pagada BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (mesa) REFERENCES mesas(num)
 );
@@ -73,3 +73,13 @@ INSERT INTO productos(nombre, precio) VALUES
 	('anis', 3.0),
     ('malibu', 3.5),
     ('vodka', 3.0);
+
+SELECT * FROM mesas;
+SELECT * FROM facturas;
+SELECT * FROM detalle_factura;
+SELECT * FROM productos;
+
+SELECT p.precio as "Precio", df.cantidad as "Uds.", p.nombre as "Producto", p.dto as "Dto. %", (p.precio-(p.precio*(p.dto/100))*df.cantidad) as "Importe", SUM(p.precio-(p.precio*(p.dto/100))*df.cantidad) as "Total"
+FROM detalle_factura df
+		INNER JOIN productos p ON df.id_producto = p.id
+        WHERE id_factura = 1;
