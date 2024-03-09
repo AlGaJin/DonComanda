@@ -88,10 +88,11 @@ SELECT p.precio as "Precio", df.cantidad as "Uds.", p.nombre as "Producto",
 		FROM detalle_factura df
 			INNER JOIN productos p ON df.id_producto = p.id
 			WHERE id_factura = 1;
+            
 -- Query utilizada en JasperSoft para generar la tabla del histórico
-SELECT DATE(f.fecha) as "Fecha", p.precio_dto as "Precio venta", SUM(df.cantidad) as "Uds.", p.nombre as "Producto", SUM(p.precio_dto*df.cantidad) as "Importe"
+SELECT p.precio_dto as "Precio venta", SUM(df.cantidad) as "Uds.", p.nombre as "Producto", SUM(p.precio_dto*df.cantidad) as "Importe"
 FROM detalle_factura df
 	INNER JOIN productos p ON df.id_producto = p.id
     INNER JOIN facturas f ON df.id_factura = f.id
     WHERE DATE(f.fecha) = CURDATE()
-    GROUP BY p.nombre, p.precio_dto, DATE(f.fecha);
+    GROUP BY p.nombre, p.precio_dto;
