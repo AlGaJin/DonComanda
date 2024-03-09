@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -16,12 +17,12 @@
             </Button>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="CONFIRMAR PAGO" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
+                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#confirmarPago" text="CONFIRMAR PAGO" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="HISTÓRICO" VBox.vgrow="ALWAYS">
+                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#historicoBtn" text="HISTÓRICO" VBox.vgrow="ALWAYS">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -51,9 +52,17 @@
                         <TextField fx:id="numMesaTxtField" editable="false">
                            <font>
                               <Font size="14.0" />
-                           </font></TextField>
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor></TextField>
                      </children>
                   </VBox>
+                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#facturaSinMesaBtn" text="Factura sin mesa" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
                </children>
             </HBox>
             <TableView fx:id="tablaPedido" VBox.vgrow="ALWAYS">
@@ -176,7 +185,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Button>
-                        <Button layoutX="45.0" layoutY="113.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#eliminarBtn" style="-fx-background-color: red;" text="Eliminar" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="3">
+                        <Button layoutX="45.0" layoutY="113.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#eliminarBtn" style="-fx-background-color: red;" text="✘" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="3">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>

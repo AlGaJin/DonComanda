@@ -95,6 +95,30 @@ public class PrimaryController {
         }
     }
 
+    @FXML
+    public void selecProducto(Event e){
+        String nombreSelec = ((Label)((Button)e.getSource()).getParent().getChildrenUnmodifiable().get(1)).getText().toLowerCase();
+        boolean enc = false;
+        if(!productos.isEmpty()){
+            for (Producto p: productos) {
+                if(p.getNombre().equals(nombreSelec)){
+                    p.aumentarUds();
+                    enc = true;
+                    break;
+                }
+            }
+        }
+
+        if(!enc){
+            productos.add(dbHelper.getProducto(nombreSelec));
+        }
+
+        if(mesa != null){
+            dbHelper.addToDetalleFactura(dbHelper.getProducto(nombreSelec), mesa.getIdFactura());
+        }
+        updateTable();
+    }
+
     private void generarTabla(){
         TableColumn<Producto, String> colProducto = new TableColumn<>("Producto");
         TableColumn<Producto, Integer> colUnidades = new TableColumn<>("Uds.");
@@ -115,6 +139,7 @@ public class PrimaryController {
     public void updateTable(){
         if(mesa != null){
             mesa.setProductos(productos);
+
         }
         tablaPedido.getItems().setAll(productos);
 
@@ -129,6 +154,15 @@ public class PrimaryController {
         articulosLabel.setText(String.valueOf(articulos));
         udsLabel.setText(String.valueOf(uds));
         totalLabel.setText(String.valueOf(total));
+    }
+
+    @FXML
+    public void facturaSinMesaBtn(){
+        mesa = null;
+        numMesaTxtField.setText("");
+        productos = FXCollections.observableArrayList();
+        mesaSelected = false;
+        updateTable();
     }
 
     @FXML
@@ -174,7 +208,7 @@ public class PrimaryController {
             if(mesa != null){
                 dbHelper.generarImporte(mesa);
             }else{
-                dbHelper.generarImporte(productos);
+                dbHelper.generarImporteSinMesa(productos);
                 productos = FXCollections.observableArrayList();
                 updateTable();
             }
@@ -182,23 +216,22 @@ public class PrimaryController {
     }
 
     @FXML
-    public void selecProducto(Event e){
-        String nombreSelec = ((Label)((Button)e.getSource()).getParent().getChildrenUnmodifiable().get(1)).getText().toLowerCase();
-        boolean enc = false;
-        if(!productos.isEmpty()){
-            for (Producto p: productos) {
-                if(p.getNombre().equals(nombreSelec)){
-                    p.aumentarUds();
-                    enc = true;
-                    break;
-                }
-            }
+    public void confirmarPago(){
+        if(mesa != null){
+            dbHelper.pagarFactura(mesa.getIdFactura());
+            mesa = null;
+            mesaSelected = false;
+            numMesaTxtField.setText("");
+            productos = FXCollections.observableArrayList();
+            updateTable();
         }
+    }
 
-        if(!enc){
-            productos.add(dbHelper.getProducto(nombreSelec));
-        }
-        updateTable();
+    @FXML
+    public void historicoBtn(){
+        final String INPUT_HISTORICO = "/Jaspersoft/FacturaHistoricoJS.jrxml";
+        final String OUTPUT_HISTORICO = "src/FacturasHistoricos/Factura_";
+        dbHelper.imprimirFactura(null, OUTPUT_HISTORICO+new java.util.Date(), INPUT_HISTORICO);
     }
 
     @FXML
@@ -232,9 +265,5 @@ public class PrimaryController {
 
     public ObservableList<Producto> getProductos(){
         return productos;
-    }
-
-    public void setProductos(ObservableList<Producto> productos){
-        this.productos = productos;
     }
 }

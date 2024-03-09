@@ -1,17 +1,23 @@
 package org.example.db;
 
 import javafx.collections.ObservableList;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 import org.example.modelo.Mesa;
 import org.example.modelo.Producto;
 
-import java.lang.reflect.Type;
+import java.io.File;
+import java.io.InputStream;
 import java.sql.*;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class DBHelper {
+    private final String INPUT_FACTSIMPLIFICADA = "/Jaspersoft/FacturaSimplificadaJS.jrxml";
+    private final String OUTPUT_FACTSIMPLIFICADA = "src/FacturasSimplificadas/Factura_";
+
     private Connection c;
     private PreparedStatement ps;
 
@@ -157,8 +163,7 @@ public class DBHelper {
         return null;
     }
 
-    public void generarImporte(ObservableList<Producto> productos){
-        int idFactura = generarFactura(null);
+    public void crearFacturaDetalle(ObservableList<Producto> productos, int idFactura){
         try{
             for (Producto p: productos) {
                 ps = c.prepareStatement("INSERT INTO detalle_factura VALUES (?,?,?)");
@@ -168,7 +173,24 @@ public class DBHelper {
                 ps.executeUpdate();
                 c.commit();
             }
+        }catch (Exception e) {
+            e.printStackTrace();
+            try {
+                c.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
 
+    public void generarImporteSinMesa(ObservableList<Producto> productos){
+        int idFactura = generarFactura(null);
+        try{
+            crearFacturaDetalle(productos, idFactura);
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("id_factura", idFactura);
+            imprimirFactura(map,OUTPUT_FACTSIMPLIFICADA+idFactura , INPUT_FACTSIMPLIFICADA);
             pagarFactura(idFactura);
         }catch (Exception e) {
             e.printStackTrace();
@@ -182,21 +204,11 @@ public class DBHelper {
 
     public void generarImporte(Mesa m){
         try{
-            for (Producto p: m.getProductos()) {
-                ps = c.prepareStatement("INSERT INTO detalle_factura VALUES (?,?,?)");
-                ps.setInt(1, m.getIdFactura());
-                ps.setInt(2, p.getId());
-                ps.setInt(3, p.getUds());
-                ps.executeUpdate();
-                c.commit();
-            }
+            Map<String, Object> map = new HashMap<>();
+            map.put("id_factura", m.getIdFactura());
+            imprimirFactura(map,OUTPUT_FACTSIMPLIFICADA+ m.getIdFactura() , INPUT_FACTSIMPLIFICADA);
         }catch (Exception e) {
             e.printStackTrace();
-            try {
-                c.rollback();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
         }
     }
 
@@ -206,11 +218,67 @@ public class DBHelper {
             ps.setInt(1,idFactura);
             ps.executeUpdate();
             c.commit();
+
+            ps = c.prepareStatement("SELECT mesa FROM facturas WHERE id = ?");
+            ps.setInt(1, idFactura);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int numMesa = rs.getInt("mesa");
+            if(numMesa > 0){
+               updateMesaOcupada(numMesa, false);
+            }
         }catch (Exception e){
             e.printStackTrace();
             try{
                 c.rollback();
             }catch (SQLException ex){
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public void updateCantidad(Producto p, int idFactura, int cantidad){
+        try{
+            ps = c.prepareStatement("UPDATE detalle_factura SET cantidad = ? WHERE id_producto = ? AND id_factura = ?");
+            ps.setInt(1, cantidad);
+            ps.setInt(2, p.getId());
+            ps.setInt(3, idFactura);
+            ps.executeUpdate();
+            c.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            try {
+                c.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public void addToDetalleFactura(Producto p, int idFactura){
+        try{
+            ps = c.prepareStatement("SELECT cantidad FROM detalle_factura WHERE id_factura = ? AND id_producto = ?");
+            ps.setInt(1, idFactura);
+            ps.setInt(2, p.getId());
+            ResultSet rs = ps.executeQuery();
+            System.out.println(p.getId());
+            System.out.println(idFactura);
+            System.out.println(rs.next());
+            /*
+            if(rs.next()){
+                updateCantidad(p, idFactura, rs.getInt("cantidad")+1);
+            }else{
+                ps = c.prepareStatement("INSERT INTO detalle_factura(id_factura, id_producto) VALUES(?,?)");
+                ps.setInt(1, idFactura);
+                ps.setInt(2, p.getId());
+                ps.executeUpdate();
+                c.commit();
+            }*/
+        }catch (Exception e){
+            e.printStackTrace();
+            try {
+                c.rollback();
+            } catch (SQLException ex) {
                 ex.printStackTrace();
             }
         }
@@ -230,6 +298,22 @@ public class DBHelper {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
+        }
+    }
+
+    public void imprimirFactura(Map<String, Object> map, String output, String input){
+        try{
+            InputStream reportFile = getClass().getResourceAsStream(input);
+            JasperReport jr = JasperCompileManager.compileReport(reportFile);
+            JasperPrint jp = JasperFillManager.fillReport(jr, map, c);
+            JRPdfExporter export = new JRPdfExporter();
+            export.setExporterInput(new SimpleExporterInput(jp));
+            export.setExporterOutput(new SimpleOutputStreamExporterOutput(new File(output+".pdf")));
+            SimplePdfExporterConfiguration config = new SimplePdfExporterConfiguration();
+            export.setConfiguration(config);
+            export.exportReport();
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 }

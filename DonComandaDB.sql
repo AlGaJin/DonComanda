@@ -11,6 +11,7 @@ CREATE TABLE productos(
 	id INT PRIMARY KEY AUTO_INCREMENT,
     nombre TEXT NOT NULL,
     precio DOUBLE,
+    precio_dto DECIMAL(6,2) AS (precio-(precio*(dto/100))),
     dto INT DEFAULT 0
 );
 
@@ -25,7 +26,7 @@ CREATE TABLE facturas(
 CREATE TABLE detalle_factura(
 	id_factura INT,
     id_producto INT,
-    cantidad INT,
+    cantidad INT DEFAULT 1,
     PRIMARY KEY (id_factura, id_producto),
     FOREIGN KEY (id_factura) REFERENCES facturas(id) ON DELETE CASCADE,
     FOREIGN KEY (id_producto) REFERENCES productos(id) ON DELETE CASCADE
@@ -76,10 +77,23 @@ INSERT INTO productos(nombre, precio) VALUES
 
 SELECT * FROM mesas;
 SELECT * FROM facturas;
-SELECT * FROM detalle_factura;
+SELECT cantidad FROM detalle_factura WHERE id_factura = 1 AND id_producto = 1;
 SELECT * FROM productos;
 
-SELECT p.precio as "Precio", df.cantidad as "Uds.", p.nombre as "Producto", p.dto as "Dto. %", (p.precio-(p.precio*(p.dto/100))*df.cantidad) as "Importe", SUM(p.precio-(p.precio*(p.dto/100))*df.cantidad) as "Total"
+SELECT * FROM detalle_factura WHERE id_factura = 1;
+
+-- Query utilizada en JasperSoft para generar la tabla de factuas simplificadas
+SELECT p.precio as "Precio", df.cantidad as "Uds.", p.nombre as "Producto",
+	p.dto as "Dto. %", p.precio_dto*df.cantidad as "Importe"
+		FROM detalle_factura df
+			INNER JOIN productos p ON df.id_producto = p.id
+			WHERE id_factura = 1;
+            
+SELECT DATE(f.fecha) as "Fecha", p.precio_dto as "Precio venta", SUM(df.cantidad) as "Uds.", p.nombre as "Producto", SUM(p.precio_dto*df.cantidad) as "Importe"
 FROM detalle_factura df
-		INNER JOIN productos p ON df.id_producto = p.id
-        WHERE id_factura = 1;
+	INNER JOIN productos p ON df.id_producto = p.id
+    INNER JOIN facturas f ON df.id_factura = f.id
+    WHERE DATE(f.fecha) = CURDATE()
+    GROUP BY p.nombre, p.precio_dto, DATE(f.fecha);
+
+SELECT p.nombre, SUM(p.precio_dto*df.cantidad), SUM(df.cantidad) FROM productos p INNER JOIN detalle_factura df ON p.id = df.id_producto INNER JOIN facturas f ON df.id_factura = f.id group by p.nombre, f.fecha;

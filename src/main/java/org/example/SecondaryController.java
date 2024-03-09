@@ -67,6 +67,7 @@ public class SecondaryController {
                     m.setIdFactura(dbHelper.generarFactura(m));
                     if(!productos.isEmpty() && !parentController.isMesaSelected()){
                         m.setProductos(productos);
+                        dbHelper.crearFacturaDetalle(productos, m.getIdFactura());
                     }
                 }
                 dbHelper.updateMesaOcupada(m.getNum(), true);
