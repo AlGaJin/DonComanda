@@ -21,6 +21,9 @@ import org.example.modelo.Mesa;
 import org.example.modelo.Producto;
 
 import java.io.File;
+import java.security.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class PrimaryController {
 
@@ -231,7 +234,8 @@ public class PrimaryController {
     public void historicoBtn(){
         final String INPUT_HISTORICO = "/Jaspersoft/FacturaHistoricoJS.jrxml";
         final String OUTPUT_HISTORICO = "src/FacturasHistoricos/Factura_";
-        dbHelper.imprimirFactura(null, OUTPUT_HISTORICO+new java.util.Date(), INPUT_HISTORICO);
+        String fechaActual = new SimpleDateFormat("ddMMyyyy").format(Calendar.getInstance().getTime());
+        dbHelper.imprimirFactura(null, OUTPUT_HISTORICO+fechaActual, INPUT_HISTORICO);
     }
 
     @FXML

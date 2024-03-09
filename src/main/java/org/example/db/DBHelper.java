@@ -165,14 +165,14 @@ public class DBHelper {
 
     public void crearFacturaDetalle(ObservableList<Producto> productos, int idFactura){
         try{
+            ps = c.prepareStatement("INSERT INTO detalle_factura VALUES (?,?,?)");
             for (Producto p: productos) {
-                ps = c.prepareStatement("INSERT INTO detalle_factura VALUES (?,?,?)");
                 ps.setInt(1, idFactura);
                 ps.setInt(2, p.getId());
                 ps.setInt(3, p.getUds());
                 ps.executeUpdate();
-                c.commit();
             }
+            c.commit();
         }catch (Exception e) {
             e.printStackTrace();
             try {
@@ -257,14 +257,12 @@ public class DBHelper {
 
     public void addToDetalleFactura(Producto p, int idFactura){
         try{
+            c.rollback(); //Este rollback sin sentido aquí soluciona, por algún motivo, un bug (no tocar)
             ps = c.prepareStatement("SELECT cantidad FROM detalle_factura WHERE id_factura = ? AND id_producto = ?");
             ps.setInt(1, idFactura);
             ps.setInt(2, p.getId());
             ResultSet rs = ps.executeQuery();
-            System.out.println(p.getId());
-            System.out.println(idFactura);
-            System.out.println(rs.next());
-            /*
+
             if(rs.next()){
                 updateCantidad(p, idFactura, rs.getInt("cantidad")+1);
             }else{
@@ -273,7 +271,7 @@ public class DBHelper {
                 ps.setInt(2, p.getId());
                 ps.executeUpdate();
                 c.commit();
-            }*/
+            }
         }catch (Exception e){
             e.printStackTrace();
             try {
