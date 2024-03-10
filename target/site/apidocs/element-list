@@ -1,2 +1,3 @@
-module:org.example
 org.example
+org.example.db
+org.example.modelo

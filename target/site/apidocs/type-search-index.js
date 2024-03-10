@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"org.example","l":"App"},{"p":"org.example","l":"PrimaryController"},{"p":"org.example","l":"SecondaryController"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"org.example","l":"App"},{"p":"org.example.db","l":"DBHelper"},{"p":"org.example.modelo","l":"Mesa"},{"p":"org.example","l":"PrimaryController"},{"p":"org.example.modelo","l":"Producto"},{"p":"org.example","l":"SecondaryController"}];updateSearchResults();

@@ -1,1 +1,1 @@
-moduleSearchIndex = [{"l":"org.example"}];updateSearchResults();
+moduleSearchIndex = [];updateSearchResults();

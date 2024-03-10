@@ -1,19 +1,14 @@
 @options
 @packages
-@argfile
---class-path
-'C:/Users/Juan/.m2/repository/commons-beanutils/commons-beanutils/1.9.4/commons-beanutils-1.9.4.jar;C:/Users/Juan/.m2/repository/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar;C:/Users/Juan/.m2/repository/commons-digester/commons-digester/2.1/commons-digester-2.1.jar;C:/Users/Juan/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar;C:/Users/Juan/.m2/repository/org/apache/commons/commons-collections4/4.2/commons-collections4-4.2.jar;C:/Users/Juan/.m2/repository/com/github/librepdf/openpdf/1.3.32/openpdf-1.3.32.jar;C:/Users/Juan/.m2/repository/org/jfree/jcommon/1.0.23/jcommon-1.0.23.jar;C:/Users/Juan/.m2/repository/org/jfree/jfreechart/1.0.19/jfreechart-1.0.19.jar;C:/Users/Juan/.m2/repository/org/eclipse/jdt/ecj/3.21.0/ecj-3.21.0.jar;C:/Users/Juan/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.3/jackson-core-2.15.3.jar;C:/Users/Juan/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.3/jackson-databind-2.15.3.jar;C:/Users/Juan/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.3/jackson-annotations-2.15.3.jar;C:/Users/Juan/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-xml/2.15.3/jackson-dataformat-xml-2.15.3.jar;C:/Users/Juan/.m2/repository/org/codehaus/woodstox/stax2-api/4.2.1/stax2-api-4.2.1.jar;C:/Users/Juan/.m2/repository/com/fasterxml/woodstox/woodstox-core/6.5.1/woodstox-core-6.5.1.jar;C:/Users/Juan/.m2/repository/org/openjfx/javafx-controls/21/javafx-controls-21.jar;C:/Users/Juan/.m2/repository/org/openjfx/javafx-graphics/21/javafx-graphics-21.jar;C:/Users/Juan/.m2/repository/org/openjfx/javafx-base/21/javafx-base-21.jar;C:/Users/Juan/.m2/repository/org/openjfx/javafx-fxml/21/javafx-fxml-21.jar;C:/Users/Juan/.m2/repository/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar;C:/Users/Juan/.m2/repository/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9.jar'
---module-path
-'C:/Users/Juan/.m2/repository/org/openjfx/javafx-base/21/javafx-base-21-win.jar;C:/Users/Juan/Documents/GitHub/DonComanda/target/classes;C:/Users/Juan/.m2/repository/org/openjfx/javafx-controls/21/javafx-controls-21-win.jar;C:/Users/Juan/.m2/repository/net/sf/jasperreports/jasperreports/6.21.2/jasperreports-6.21.2.jar;C:/Users/Juan/.m2/repository/com/itextpdf/itextpdf/5.5.6/itextpdf-5.5.6.jar;C:/Users/Juan/.m2/repository/org/openjfx/javafx-graphics/21/javafx-graphics-21-win.jar;C:/Users/Juan/.m2/repository/org/openjfx/javafx-fxml/21/javafx-fxml-21-win.jar'
---patch-module
-org.example='C:/Users/Juan/Documents/GitHub/DonComanda/src/main/java'
+-classpath
+'C:/Users/Juan/.m2/repository/net/sf/jasperreports/jasperreports/6.21.2/jasperreports-6.21.2.jar;C:/Users/Juan/.m2/repository/commons-beanutils/commons-beanutils/1.9.4/commons-beanutils-1.9.4.jar;C:/Users/Juan/.m2/repository/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar;C:/Users/Juan/.m2/repository/commons-digester/commons-digester/2.1/commons-digester-2.1.jar;C:/Users/Juan/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar;C:/Users/Juan/.m2/repository/org/apache/commons/commons-collections4/4.2/commons-collections4-4.2.jar;C:/Users/Juan/.m2/repository/com/github/librepdf/openpdf/1.3.32/openpdf-1.3.32.jar;C:/Users/Juan/.m2/repository/org/jfree/jcommon/1.0.23/jcommon-1.0.23.jar;C:/Users/Juan/.m2/repository/org/jfree/jfreechart/1.0.19/jfreechart-1.0.19.jar;C:/Users/Juan/.m2/repository/org/eclipse/jdt/ecj/3.21.0/ecj-3.21.0.jar;C:/Users/Juan/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.3/jackson-core-2.15.3.jar;C:/Users/Juan/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.3/jackson-databind-2.15.3.jar;C:/Users/Juan/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.3/jackson-annotations-2.15.3.jar;C:/Users/Juan/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-xml/2.15.3/jackson-dataformat-xml-2.15.3.jar;C:/Users/Juan/.m2/repository/org/codehaus/woodstox/stax2-api/4.2.1/stax2-api-4.2.1.jar;C:/Users/Juan/.m2/repository/com/fasterxml/woodstox/woodstox-core/6.5.1/woodstox-core-6.5.1.jar;C:/Users/Juan/.m2/repository/com/itextpdf/itextpdf/5.5.6/itextpdf-5.5.6.jar;C:/Users/Juan/.m2/repository/org/openjfx/javafx-controls/21/javafx-controls-21.jar;C:/Users/Juan/.m2/repository/org/openjfx/javafx-controls/21/javafx-controls-21-win.jar;C:/Users/Juan/.m2/repository/org/openjfx/javafx-graphics/21/javafx-graphics-21.jar;C:/Users/Juan/.m2/repository/org/openjfx/javafx-graphics/21/javafx-graphics-21-win.jar;C:/Users/Juan/.m2/repository/org/openjfx/javafx-base/21/javafx-base-21.jar;C:/Users/Juan/.m2/repository/org/openjfx/javafx-base/21/javafx-base-21-win.jar;C:/Users/Juan/.m2/repository/org/openjfx/javafx-fxml/21/javafx-fxml-21.jar;C:/Users/Juan/.m2/repository/org/openjfx/javafx-fxml/21/javafx-fxml-21-win.jar;C:/Users/Juan/.m2/repository/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar;C:/Users/Juan/.m2/repository/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9.jar'
 -encoding
 'UTF-8'
 -protected
 -source
-'11'
---module-source-path
-'C:/Users/Juan/Documents/GitHub/DonComanda/target/site/apidocs/src'
+'1.8'
+-sourcepath
+'C:/Users/Juan/Documents/GitHub/DonComanda/src/main/java'
 -author
 -bottom
 'Copyright &#169; 2024. All rights reserved.'
@@ -26,27 +21,57 @@ org.example='C:/Users/Juan/Documents/GitHub/DonComanda/src/main/java'
 -doctitle
 'DonComanda 1.0-SNAPSHOT API'
 -linkoffline
-'https://docs.oracle.com/en/java/javase/11/docs/api' 'C:/Users/Juan/Documents/GitHub/DonComanda/target/javadoc-bundle-options'
+'https://docs.oracle.com/javase/8/docs/api' 'C:/Users/Juan/Documents/GitHub/DonComanda/target/javadoc-bundle-options'
 -use
 -version
 -windowtitle
 'DonComanda 1.0-SNAPSHOT API'
 org.example
-'C:/Users/Juan/Documents/GitHub/DonComanda/src/main/java/module-info.java'
-C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\allclasses-index.html = 1710081253227
-C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\allpackages-index.html = 1710081253231
-C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\element-list = 1710081253129
-C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\help-doc.html = 1710081253272
-C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\index-all.html = 1710081253262
-C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\index.html = 1710081253264
-C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\javadoc.bat = 1710081217510
-C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\jquery-ui.overrides.css = 1710081253319
-C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\member-search-index.js = 1710081253238
-C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\module-search-index.js = 1710081253233
-C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\overview-tree.html = 1710081253209
-C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\package-search-index.js = 1710081253235
-C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\script.js = 1710081253279
-C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\search.js = 1710081253282
-C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\stylesheet.css = 1710081253277
-C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\tag-search-index.js = 1710081253241
-C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\type-search-index.js = 1710081253236
+org.example.db
+org.example.modelo
+C:\Users\Juan\.m2\repository\net\sf\jasperreports\jasperreports\6.21.2\jasperreports-6.21.2.jar = 1709941454358
+C:\Users\Juan\.m2\repository\commons-beanutils\commons-beanutils\1.9.4\commons-beanutils-1.9.4.jar = 1696954487447
+C:\Users\Juan\.m2\repository\commons-collections\commons-collections\3.2.2\commons-collections-3.2.2.jar = 1696516471907
+C:\Users\Juan\.m2\repository\commons-digester\commons-digester\2.1\commons-digester-2.1.jar = 1706196738631
+C:\Users\Juan\.m2\repository\commons-logging\commons-logging\1.1.1\commons-logging-1.1.1.jar = 1706196737050
+C:\Users\Juan\.m2\repository\org\apache\commons\commons-collections4\4.2\commons-collections4-4.2.jar = 1706196739817
+C:\Users\Juan\.m2\repository\com\github\librepdf\openpdf\1.3.32\openpdf-1.3.32.jar = 1709941454400
+C:\Users\Juan\.m2\repository\org\jfree\jcommon\1.0.23\jcommon-1.0.23.jar = 1706196738508
+C:\Users\Juan\.m2\repository\org\jfree\jfreechart\1.0.19\jfreechart-1.0.19.jar = 1706196741610
+C:\Users\Juan\.m2\repository\org\eclipse\jdt\ecj\3.21.0\ecj-3.21.0.jar = 1706196744245
+C:\Users\Juan\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.15.3\jackson-core-2.15.3.jar = 1699985617877
+C:\Users\Juan\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.15.3\jackson-databind-2.15.3.jar = 1699985617742
+C:\Users\Juan\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.15.3\jackson-annotations-2.15.3.jar = 1699985617749
+C:\Users\Juan\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-xml\2.15.3\jackson-dataformat-xml-2.15.3.jar = 1706196737346
+C:\Users\Juan\.m2\repository\org\codehaus\woodstox\stax2-api\4.2.1\stax2-api-4.2.1.jar = 1706196737596
+C:\Users\Juan\.m2\repository\com\fasterxml\woodstox\woodstox-core\6.5.1\woodstox-core-6.5.1.jar = 1706196742286
+C:\Users\Juan\.m2\repository\com\itextpdf\itextpdf\5.5.6\itextpdf-5.5.6.jar = 1709941281910
+C:\Users\Juan\.m2\repository\org\openjfx\javafx-controls\21\javafx-controls-21.jar = 1696616209918
+C:\Users\Juan\.m2\repository\org\openjfx\javafx-controls\21\javafx-controls-21-win.jar = 1696616213394
+C:\Users\Juan\.m2\repository\org\openjfx\javafx-graphics\21\javafx-graphics-21.jar = 1696616209918
+C:\Users\Juan\.m2\repository\org\openjfx\javafx-graphics\21\javafx-graphics-21-win.jar = 1696616215517
+C:\Users\Juan\.m2\repository\org\openjfx\javafx-base\21\javafx-base-21.jar = 1696616209883
+C:\Users\Juan\.m2\repository\org\openjfx\javafx-base\21\javafx-base-21-win.jar = 1696616211185
+C:\Users\Juan\.m2\repository\org\openjfx\javafx-fxml\21\javafx-fxml-21.jar = 1696616210268
+C:\Users\Juan\.m2\repository\org\openjfx\javafx-fxml\21\javafx-fxml-21-win.jar = 1696616210245
+C:\Users\Juan\.m2\repository\com\mysql\mysql-connector-j\8.0.33\mysql-connector-j-8.0.33.jar = 1706198868802
+C:\Users\Juan\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar = 1706198868303
+C:\Users\Juan\Documents\GitHub\DonComanda\src\main\java\module-info.java = 1710106892810
+C:\Users\Juan\Documents\GitHub\DonComanda\src\main\java = 1710106892810
+C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\allclasses-index.html = 1710106915143
+C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\allpackages-index.html = 1710106915149
+C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\element-list = 1710106914989
+C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\help-doc.html = 1710106915186
+C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\index-all.html = 1710106915178
+C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\index.html = 1710106915121
+C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\jquery-ui.overrides.css = 1710106915223
+C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\member-search-index.js = 1710106915155
+C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\module-search-index.js = 1710106915150
+C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\overview-summary.html = 1710106915181
+C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\overview-tree.html = 1710106915116
+C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\package-search-index.js = 1710106915152
+C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\script.js = 1710106915191
+C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\search.js = 1710106915194
+C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\stylesheet.css = 1710106915190
+C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\tag-search-index.js = 1710106915156
+C:\Users\Juan\Documents\GitHub\DonComanda\target\site\apidocs\type-search-index.js = 1710106915153
