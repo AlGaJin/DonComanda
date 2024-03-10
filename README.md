@@ -3,7 +3,7 @@
 
  ## Índice
  1. [Introducción](#introducción)
- 2. [Lenguajes y programas utilizados](#lenguajes-y-programas-utilizados)
+ 2. [Lenguajes, librerías y entornos de desarrollo utilizados](#lenguajes-librerías-y-entornos-de-desarrollo-utilizados)
  3. [Funcionalidades](#funcionalidades)
  4. [Futuras mejoras](#futuras-mejoras)
  5. [ChangeLog](#changelog) 
@@ -11,18 +11,23 @@
  ## Introducción
   <p align="justify">La principal motivación para crear este proyecto es poder aprobar el módulo de Desarrollo de Interfaces, es decir, que es un trabajo de clase. Sin embargo, eso no quiere decir que no le haya dedicado tiempo y esfuerzo al programa. De hecho, todo lo contrario, he tenido que dedicarle mucho tiempo a solucionar muchos errores que me han surgido con JasperSoft, así como con la interfaz gráfica, que si la desplegáis veréis que, tal vez, no es la cosa más bonita que hayáis podido ver.</p>
   
- ## Lenguajes y programas utilizados
+ ## Lenguajes, librerías y entornos de desarrollo utilizados
  
   <div align="center">
    <img src="https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java">
    <img src="https://img.shields.io/badge/mysql-%234479A1.svg?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
+   
+  </div>
+
+  <div align="center">
    <img src="https://img.shields.io/badge/javafx-%23FF0000.svg?style=for-the-badge&logo=javafx&logoColor=white" alt="JavaFX">
+   <img src="https://img.shields.io/badge/JasperReport-%23FF0000.svg?style=for-the-badge&logo=javafx&logoColor=white" alt="JasperReport">
   </div>
 
   <div align="center">
    <img src="https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white" alt="IntelliJ IDEA">
-   <img src="https://img.shields.io/badge/MySQL_Workbench-%23224f70.svg?style=for-the-badge&logo=mysql&logoColor=orange" alt="MySQL">
-   <img src="https://img.shields.io/badge/JasperSoft-0e67a4.svg?style=for-the-badge&logo=apache&logoColor=white" alt="JavaFX">
+   <img src="https://img.shields.io/badge/MySQL_Workbench-%23224f70.svg?style=for-the-badge&logo=mysql&logoColor=orange" alt="MySQL WorkBench">
+   <img src="https://img.shields.io/badge/JasperSoft-0e67a4.svg?style=for-the-badge&logo=apache&logoColor=white" alt="JasperSoft">
   </div>
  
  ## Funcionalidades
