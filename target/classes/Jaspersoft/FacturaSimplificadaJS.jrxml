@@ -51,7 +51,7 @@
 	p.dto as "Dto. %", p.precio_dto*df.cantidad as "Importe"
 		FROM detalle_factura df
 			INNER JOIN productos p ON df.id_producto = p.id
-			WHERE id_factura = $P{id_factura} ]]>
+			WHERE id_factura = $P{id_factura}]]>
 		</queryString>
 		<field name="Precio" class="java.lang.Double">
 			<property name="com.jaspersoft.studio.field.name" value="precio"/>
@@ -86,7 +86,7 @@
 		<![CDATA[]]>
 	</queryString>
 	<title>
-		<band height="91" splitType="Stretch">
+		<band height="118" splitType="Stretch">
 			<staticText>
 				<reportElement x="200" y="0" width="160" height="30" uuid="48900230-5432-49a3-80be-6d84cbed7fc2"/>
 				<textElement textAlignment="Center">
@@ -104,8 +104,22 @@ N.I.F. B-01378777
 C/ Marquesa de Pinares nº5]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="5" y="87" width="545" height="1" uuid="a4c443bf-1f74-4331-bf3d-9127fb73a753"/>
+				<reportElement x="5" y="113" width="545" height="1" uuid="a4c443bf-1f74-4331-bf3d-9127fb73a753"/>
 			</rectangle>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="5" y="79" width="221" height="34" uuid="19308c0f-f446-4302-b99f-3ce9bb254d86"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cascadia Mono" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm">
+				<reportElement x="320" y="79" width="231" height="34" uuid="35c8b358-01a3-4946-bf2a-4e1e62c4ae68"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cascadia Mono" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageFooter>

@@ -14,20 +14,27 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * Clase que permite hacer cambios en la base de datos con ayuda de JDBC
+ */
 public class DBHelper {
+    //Ruta del .jrxml para generar facturas simplificadas
     private final String INPUT_FACTSIMPLIFICADA = "/Jaspersoft/FacturaSimplificadaJS.jrxml";
+    //Ruta y nombre con el que se va a guardar la factura simplificada
     private final String OUTPUT_FACTSIMPLIFICADA = "src/FacturasSimplificadas/Factura_";
+    private Connection c; //Conexión con la base de datos
+    private PreparedStatement ps; //Permite las acciones CRUD con la base de datos
 
-    private Connection c;
-    private PreparedStatement ps;
-
+    /**
+     * Constructor sin parámetros que inicializa una conexión con la base de datos
+     */
     public DBHelper(){
-        String db = "DonComanda";
-        String host = "localhost";
-        String port = "3306";
-        String urlConnection = "jdbc:mysql://"+host+":"+port+"/"+db;
-        String user = "root";
-        String pwd = "Lego";
+        String db = "DonComanda"; // Nombre de la base de datos
+        String host = "localhost"; // Host de la base de datos
+        String port = "3306"; // Puerto dedicado a la base de datos
+        String urlConnection = "jdbc:mysql://"+host+":"+port+"/"+db; //Url que establece la conexión con la base de datos
+        String user = "root"; //Usuario de la base de datos
+        String pwd = "Lego"; //Contraseña de la base de datos
 
         try{
             c = DriverManager.getConnection(urlConnection, user, pwd);
@@ -37,20 +44,28 @@ public class DBHelper {
         }
     }
 
+    /**
+     * Recupera los productos que tenía una mesa asociada y se los añade a su lista
+     * @param mesa La mesa de la que se quiere obtener los productos
+     */
     private void setProductos(Mesa mesa){
         try{
+            //Se comprueba que tenga una factura sin pagar
             ps = c.prepareStatement("SELECT id FROM facturas WHERE mesa=? AND pagada=false ORDER BY fecha DESC LIMIT 1");
             ps.setInt(1, mesa.getNum());
             ResultSet rs = ps.executeQuery();
 
-            if(rs.next()){
-                int id_factura = rs.getInt("id");
-                mesa.setIdFactura(id_factura);
+            if(rs.next()){//Si tiene una factura sin pagar:
+
+                int id_factura = rs.getInt("id"); //Se obtiene el identificador de la factura
+                mesa.setIdFactura(id_factura); //Se setea en la mesa
+
+                //Consulta para obtener los productos pedidos
                 ps = c.prepareStatement("SELECT * FROM detalle_factura WHERE id_factura=?");
                 ps.setInt(1, id_factura);
                 rs = ps.executeQuery();
 
-                while (rs.next()){
+                while (rs.next()){ //Mientras haya tuplas en la consulta, se irán creando productos y añadiendo a la lista de la mesa
                     int id_producto = rs.getInt("id_producto");
                     int cantidad = rs.getInt("cantidad");
                     ps = c.prepareStatement("SELECT * FROM productos WHERE id=?");
@@ -71,6 +86,10 @@ public class DBHelper {
         }
     }
 
+    /**
+     * Permite obtener las mesas que hay en base de datos con los productos que hayan anotado a su cuenta
+     * @return La lista de mesas que hay en base de datos con los productos que tengan anotados a su cuenta
+     */
     public LinkedList<Mesa> getMesas(){
         try{
             LinkedList<Mesa> mesas = new LinkedList<>();
@@ -89,6 +108,11 @@ public class DBHelper {
         return null;
     }
 
+    /**
+     * Permite obtener un producto de la base de datos con el nombre que lo identifica
+     * @param nombre Nombre del producto que se quiere obtener
+     * @return Un producto con los datos básicos que identifican a un producto, o null en el caso de que se produzca un error inesperado
+     */
     public Producto getProducto(String nombre) {
         try{
             ps = c.prepareStatement("SELECT * FROM productos WHERE nombre=?");
@@ -107,11 +131,16 @@ public class DBHelper {
         return null;
     }
 
-    public void updateMesaOcupada(int idMesa, boolean ocupada){
+    /**
+     * Cambia el estado de la mesa en la base de datos
+     * @param numMesa Número identificativo de la mesa
+     * @param ocupada El estado al que se quiere poner la mesa (True si está ocupada, False si no lo está)
+     */
+    public void updateMesaOcupada(int numMesa, boolean ocupada){
         try{
             ps = c.prepareStatement("UPDATE mesas SET ocupada =? WHERE num=?");
             ps.setBoolean(1, ocupada);
-            ps.setInt(2, idMesa);
+            ps.setInt(2, numMesa);
             ps.executeUpdate();
             c.commit();
         }catch (Exception e){
@@ -124,6 +153,11 @@ public class DBHelper {
         }
     }
 
+    /**
+     * Genera una nueva factura en base de datos para la mesa, puede ser null si la factura no es para una mesa
+     * @param m Mesa a la que se va a relacionar la nueva factura
+     * @return El número identificador de la factura, o null si se produce un error inesperado
+     */
     public Integer generarFactura(Mesa m){
         Integer mesaNum = null;
         if(m != null){
@@ -163,6 +197,12 @@ public class DBHelper {
         return null;
     }
 
+    /**
+     * Permite generar los datos en la tabla de la base de datos para indicar los productos y las cantidades
+     * que se han pedido de dicho producto en una factura concreta
+     * @param productos La lista de productos que se quieren añadir a la base de datos
+     * @param idFactura El identificador de la factura a la que estará relacionada la tabla
+     */
     public void crearFacturaDetalle(ObservableList<Producto> productos, int idFactura){
         try{
             ps = c.prepareStatement("INSERT INTO detalle_factura VALUES (?,?,?)");
@@ -183,14 +223,19 @@ public class DBHelper {
         }
     }
 
+    /**
+     * Genera un importe para un pedido sin mesa asignada, en este caso se imprime la factura y se paga al instante
+     * @param productos La lista de productos que se han pedido
+     */
     public void generarImporteSinMesa(ObservableList<Producto> productos){
-        int idFactura = generarFactura(null);
+        int idFactura = generarFactura(null); //Se genera la factura para el pedido
         try{
-            crearFacturaDetalle(productos, idFactura);
+            crearFacturaDetalle(productos, idFactura); //Se añaden los productos con la factura generada
 
-            Map<String, Object> map = new HashMap<>();
-            map.put("id_factura", idFactura);
-            imprimirFactura(map,OUTPUT_FACTSIMPLIFICADA+idFactura , INPUT_FACTSIMPLIFICADA);
+            //Se crea la factura simplificada
+            generarImporte(idFactura);
+
+            //Y se paga la factura
             pagarFactura(idFactura);
         }catch (Exception e) {
             e.printStackTrace();
@@ -202,16 +247,24 @@ public class DBHelper {
         }
     }
 
-    public void generarImporte(Mesa m){
+    /**
+     * Genera la factura simplificada con JasperReport
+     * @param idFactura el id de la factura que se quiere imprimir
+     */
+    public void generarImporte(int idFactura){
         try{
             Map<String, Object> map = new HashMap<>();
-            map.put("id_factura", m.getIdFactura());
-            imprimirFactura(map,OUTPUT_FACTSIMPLIFICADA+ m.getIdFactura() , INPUT_FACTSIMPLIFICADA);
+            map.put("id_factura", idFactura);
+            imprimirFactura(map,OUTPUT_FACTSIMPLIFICADA+ idFactura , INPUT_FACTSIMPLIFICADA);
         }catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Cambia el estado de una factura a "pagado", si hay una mesa relacionada cambia su estado a no ocupada
+     * @param idFactura El identificador de la factura que se quiere pagar
+     */
     public void pagarFactura(int idFactura){
         try{
             ps = c.prepareStatement("UPDATE facturas SET pagada = true WHERE id=?");
@@ -237,11 +290,17 @@ public class DBHelper {
         }
     }
 
-    public void updateCantidad(Producto p, int idFactura, int cantidad){
+    /**
+     * Cambia la cantidad pedida de un producto en la tabla de detalle_producto
+     * @param idProducto El producto al que se le quiere cambiar la cantidad pedida
+     * @param idFactura La factura a la que está relacionada el producto
+     * @param cantidad La cantidad que se le quiere aplicar
+     */
+    public void updateCantidad(int idProducto, int idFactura, int cantidad){
         try{
             ps = c.prepareStatement("UPDATE detalle_factura SET cantidad = ? WHERE id_producto = ? AND id_factura = ?");
             ps.setInt(1, cantidad);
-            ps.setInt(2, p.getId());
+            ps.setInt(2, idProducto);
             ps.setInt(3, idFactura);
             ps.executeUpdate();
             c.commit();
@@ -255,20 +314,26 @@ public class DBHelper {
         }
     }
 
-    public void addToDetalleFactura(Producto p, int idFactura){
+    /**
+     * Método que añade un producto a la tabla detalle_factura, si ya está insertada en la tabla aumentará
+     * su cantidad pedida en uno
+     * @param idProducto El identificador del producto que se va a añadir, o aumentar las unidades pedidas, a la tabla
+     * @param idFactura La factura a la que está realcionada el producto
+     */
+    public void addToDetalleFactura(int idProducto, int idFactura){
         try{
-            c.rollback(); //Este rollback sin sentido aquí soluciona, por algún motivo, un bug (no tocar)
+            c.rollback(); //Este rollback sin sentido soluciona, por algún motivo, un bug (no tocar)
             ps = c.prepareStatement("SELECT cantidad FROM detalle_factura WHERE id_factura = ? AND id_producto = ?");
             ps.setInt(1, idFactura);
-            ps.setInt(2, p.getId());
+            ps.setInt(2, idProducto);
             ResultSet rs = ps.executeQuery();
 
             if(rs.next()){
-                updateCantidad(p, idFactura, rs.getInt("cantidad")+1);
+                updateCantidad(idProducto, idFactura, rs.getInt("cantidad")+1);
             }else{
                 ps = c.prepareStatement("INSERT INTO detalle_factura(id_factura, id_producto) VALUES(?,?)");
                 ps.setInt(1, idFactura);
-                ps.setInt(2, p.getId());
+                ps.setInt(2, idProducto);
                 ps.executeUpdate();
                 c.commit();
             }
@@ -282,6 +347,11 @@ public class DBHelper {
         }
     }
 
+    /**
+     * Elimina un producto que se había pedido con anterioridad
+     * @param idProducto El identificador del producto que se quiere eliminar
+     * @param idFactura El identificador de la factura a la que está relacionado el producto
+     */
     public void deleteFromDetalleFactura(int idProducto, int idFactura) {
         try{
             ps = c.prepareStatement("DELETE FROM detalle_factura WHERE id_factura = ? AND id_producto = ?");
@@ -299,6 +369,12 @@ public class DBHelper {
         }
     }
 
+    /**
+     * Genera un .pdf con el estilo .jrxml indicado
+     * @param map Contiene los parámetros que se le quiera pasa al JasperReport
+     * @param output La ruta donde se va a guardar el pdf generado
+     * @param input La ruta del .jrxml que se va a usar para generar el pdf
+     */
     public void imprimirFactura(Map<String, Object> map, String output, String input){
         try{
             InputStream reportFile = getClass().getResourceAsStream(input);

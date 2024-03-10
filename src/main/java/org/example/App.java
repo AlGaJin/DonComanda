@@ -5,19 +5,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.example.modelo.Mesa;
 
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
- * JavaFX App
+ * Clase principal que permite lanzar y mostrar la aplicación
  */
 public class App extends Application {
 
     private static Scene scene;
 
+    /**
+     * Implementación de la interfaz Application, permite indicar qué escena se va a iniar
+     * @param stage La ventana en la que se va a mostrar la escena
+     * @throws IOException Si no se encuentra el archivo fxml que contiene los datos de la vista de la ventana
+     */
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("primary"), 640, 480);
@@ -26,10 +28,12 @@ public class App extends Application {
         stage.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
-
+    /**
+     * Carga un fxml
+     * @param fxml Ruta de acceso al .fxml
+     * @return El fxml cargado
+     * @throws IOException Si no se encuentra el archivo especificado en la ruta proporcinada
+     */
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
