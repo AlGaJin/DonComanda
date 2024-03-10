@@ -6,20 +6,18 @@
  2. [Lenguajes y programas utilizados](#lenguajes-y-programas-utilizados)
  3. [Funcionalidades](#funcionalidades)
  4. [Futuras mejoras](#futuras-mejoras)
+ 5. [ChangeLog](#changelog) 
 
  ## Introducción
   <p align="justify">La principal motivación para crear este proyecto es poder aprobar el módulo de Desarrollo de Interfaces, es decir, que es un trabajo de clase. Sin embargo, eso no quiere decir que no le haya dedicado tiempo y esfuerzo al programa. De hecho, todo lo contrario, he tenido que dedicarle mucho tiempo a solucionar muchos errores que me han surgido con JasperSoft, así como con la interfaz gráfica, que si la desplegáis veréis que, tal vez, no es la cosa más bonita que hayáis podido ver.</p>
   
  ## Lenguajes y programas utilizados
- Los lenguajes utilizados para crear DonComanda han sido:
  
   <div align="center">
    <img src="https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java">
    <img src="https://img.shields.io/badge/mysql-%234479A1.svg?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
    <img src="https://img.shields.io/badge/javafx-%23FF0000.svg?style=for-the-badge&logo=javafx&logoColor=white" alt="JavaFX">
   </div>
-
- Y los IDE utilizados han sido:
 
   <div align="center">
    <img src="https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white" alt="IntelliJ IDEA">
@@ -38,5 +36,35 @@
  <p align="justify">Cabe mencionar que si se cambia de mesa o se cierra el programa, las mesas seguirán manteniendo la lista de productos que tenían asociados.</p>
  
  ## Futuras mejoras
- - Sin duda alguna, un aspecto a mejorar de la aplicación es el diseño de la interfaz, es altamente intuitivo, pero no es realmente agradable a la vista.
- - Otra mejora que me gustaría implementar sería la posibilidad de poder hacer la aplicación más personalizable, que no haya necesidad de tocar la base de datos o el código fuente.
+ - <p align="justify"> Sin duda alguna, un aspecto a mejorar de la aplicación es el diseño de la interfaz, es altamente intuitivo, pero no es realmente agradable a la vista.</p>
+ - <p align="justify"> Otra mejora que me gustaría implementar sería la posibilidad de poder hacer la aplicación más personalizable, que no haya necesidad de tocar la base de datos o el código fuente. </p>
+
+ ## ChangeLog
+ - ### Version 1.0.2 (10/03/2024)
+<p align="justify">Modificación del diseño de la factura simplificada de JasperReport</p>
+<p align="justify">Se ha comentado el código para generar un JavaDoc</p>
+
+ - ### Version 1.0.1 (09/03/2024)
+<p align="justify">Solución de un bug</p>
+
+ - ### Version 1.0.0 (09/03/2024)
+<p align="justify">Actualización de la base de datos: ahora los productos almacenan su precio final con el dto. aplicado</p>
+<p align="justify">Se peuden generar facturas en formato .pdf con la implemenación de JasperReport y iText</p>
+<p align="justify">Se ha añadido la posibilidad de crear facturas sin mesas</p>
+<p align="justify">Ahora cada vez que se añade un producto a la cuenta de una mesa, también se agregan en base de datos</p>
+
+ - ### Version 0.2.0 (07/03/2024)
+<p align="justify">Se ha creado una nueva vista que permite ver las mesas y la conexión entre controladores</p>
+<p align="justify">Se ha optimizado el código de la base de datos</p>
+
+ - ### Version 0.1.1 (06/03/2024)
+<p align="justify">Nuevos cambios visuales</p>
+<p align="justify">Se ha agregado funcionalidad a la calculadora</p>
+
+ - ### Version 0.1.0 (05/03/2024)
+<p align="justify">Se han conseguido las imagenes reescalables</p>
+<p align="justify">Se ha creado la base de datos: "DonComanda.sql"</p>
+
+ - ### Version 0.0.0 (22/02/2024)
+ <p align="justify">Disposición de los elementos de la vista principal</p>
+ 
